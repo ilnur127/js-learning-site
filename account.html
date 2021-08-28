@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Главная</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="logo" href="index.html">РамильJS</a>
+        <a class="account_link" href="account.html">Account</a>
+        <a class="account_link" href="#" onclick="localStorage.clear();document.location.href = document.location.href.replace('account.html','index.html');">Выйти</a>
+    </nav>
+    <div class="container">
+        <h1>Личный кабинет</h1>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 order-sm-1">
+                <center><img src="img/user.png" alt="">
+                    <div class="login"></div>
+                    <div class="roles"></div>
+                </center>
+            </div>
+            <div class="col-lg-10 col-md-10 order-sm-2">
+                <div class="row">
+                    <div class="col">Дата начала обучения</div>
+                    <div class="col" id="start"></div>
+                </div>
+                <div class="row">
+                    <div class="col">Дата окончания обучения</div>
+                    <div class="col" id="finish"></div>
+                </div>
+                <div class="row">
+                    <div class="col">Прогресс</div>
+                    <div class="col">Вы остановились на вкладке "<span id="progress"></span>"</div>
+                </div>
+                <div class="row">
+                    <div class="col">Рузультат 1 теста</div>
+                    <div class="col"><span class="result_point_test1"></span> баллов из 5</div>
+                </div>
+                <div class="row">
+                    <div class="col">Результат 2 теста</div>
+                    <div class="col"><span class="result_point_test2"></span> баллов из 5</div>
+                </div>
+                <div class="row">
+                    <div class="col">Результат 3 теста</div>
+                    <div class="col"><span class="result_point_test3"></span> баллов из 5</div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <button class="clearResults" onclick="localStorage.clear();document.location.reload();">Сборосить результаты</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <a href="#" class="scrollup"><img src="img/up.png" alt=""></a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/acc.js"></script>
+</body>
+
+</html>

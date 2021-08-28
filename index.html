@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Главная</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark menu">
+        <a class="logo" href="#">РамильJS</a>
+        <a class="account_link" href="account.html">Account</a>
+        <a class="account_link" href="#" onclick="localStorage.clear();document.location.reload();">Выйти</a>
+        <span class="mobile-bar" onclick="toggleMobileMenu();">
+            <span></span>
+        <span></span>
+        <span></span>
+        </span>
+    </nav>
+    <div class="container">
+        <div class="main">
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" id="login" name="login" placeholder="Логин">
+                <small id="loginHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" class="form-control" id="password" name="password" placeholder="Пароль">
+                <small id="passwordHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group singin">
+                <label for="fio">FIO</label>
+                <input type="text" class="form-control" id="fio" name="fio" placeholder="ФИО">
+                <small id="passwordHelp" class="form-text text-muted"></small>
+            </div>
+            <div class="error-message"></div>
+            <button class="login btn btn-primary" onclick="login();">Войти</button>
+            <button class="singin btn btn-primary" onclick="singin();">Зарегестрироваться</button>
+            <span class="login" onclick="singinShow('singin');">Зарегестрироваться</span>
+            <span class="singin" onclick="singinShow('login');" style="display: none;">Войти</span>
+        </div>
+    </div>
+    <div class="mainActive">
+        <div class="row">
+            <div class="col-2" id="themeMenu">
+                <div class="list-group list-group-flush mainActiveList topics" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action list-group-item-light active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Главная</a>
+                    <div class="list-group-item list-group-item-action list-group-item-light" style="cursor: pointer;" onclick="showChapter1()">Группы операторов &#8595;</div>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-arithmetic-list" data-toggle="list" href="#list-arithmetic" role="tab" aria-controls="arithmetic">&#8226; Арифметические операторы</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-assignment-list" data-toggle="list" href="#list-assignment" role="tab" aria-controls="assignment">&#8226; Операторы присвоения</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-string-list" data-toggle="list" href="#list-string" role="tab" aria-controls="string">&#8226; Строковые операторы</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-comparisons-list" data-toggle="list" href="#list-comparisons" role="tab" aria-controls="comparisons">&#8226; Операторы сравнения</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-conditional-list" data-toggle="list" href="#list-conditional" role="tab" aria-controls="conditional">&#8226; Условные (тернарные) операторы</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-logical-list" data-toggle="list" href="#list-logical" role="tab" aria-controls="logical">&#8226; Логические операторы</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-binary-list" data-toggle="list" href="#list-binary" role="tab" aria-controls="binary">&#8226; Бинарные операторы</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-unary-list" data-toggle="list" href="#list-unary" role="tab" aria-controls="unary">&#8226; Унарные операторы</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light Chapter1" style="display:none;padding-left: 30px;" id="list-relationship-list" data-toggle="list" href="#list-relationship" role="tab" aria-controls="relationship">&#8226; Операторы отношения</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-associativity-list" data-toggle="list" href="#list-associativity" role="tab" aria-controls="associativity">Ассициативность</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-callJS-list" data-toggle="list" href="#list-callJS" role="tab" aria-controls="callJS">Вызов JavaScript-кода</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-handlers-list" data-toggle="list" href="#list-handlers" role="tab" aria-controls="handlers">Обработчики событий в HTML</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-test1-list" data-toggle="list" href="#list-test1" role="tab" aria-controls="test1">Тест 1 <p>Выполнен на <span class="result_point_test1"></span> из 5</p></a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-test2-list" data-toggle="list" href="#list-test2" role="tab" aria-controls="test2">Тест 2 <p>Выполнен на <span class="result_point_test2"></span> из 5</p></a>
+                    <a class="list-group-item list-group-item-action list-group-item-light" id="list-test3-list" data-toggle="list" href="#list-test3" role="tab" aria-controls="test3">Тест 3 <p>Выполнен на <span class="result_point_test3"></span> из 5</p></a>
+                </div>
+            </div>
+            <div class="col-10 description">
+                <div class="tab-content mainActiveListContent" id="nav-tabContent">
+                    <div class="tab-pane fade active show" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                        <div class="contentIn">
+                            <span class="redString">
+                                <h2>Описание сайта</h2>
+                            </span>
+                            <p class="redString">Данный сайт предназначен для знакомства с основными разновидностями операторов JavaScript.</p>
+                            <p class="redString">Здесь вы можете посмотреть основные разновидности операторов JavaScript, их ассоциативность и методы применения.</p>
+                            <p class="redString">Вы сможете изучить основные разновидности операторов самостоятельно и подробно. Для этого нажмите на название операторов в меню слева.</p>
+                            <p class="redString">Так же по мере изучения теоретического материала вам будут доступны два основных теста и итоговый тест. Следите за меню слева.</p>
+                            <p class="redString">Удачного изучения и прохождения тестов!</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-arithmetic" role="tabpanel" aria-labelledby="list-arithmetic-list">
+                        <div class="contentIn">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="arithmetictheory-tab" data-toggle="tab" href="#arithmetictheory" role="tab" aria-controls="arithmetictheory" aria-selected="true">Теория</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="arithmeticcode-tab" data-toggle="tab" href="#arithmeticcode" role="tab" aria-controls="arithmeticcode" aria-selected="false">Код</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="arithmetictheory" role="tabpanel" aria-labelledby="arithmetictheory-tab">
+                                    <span class="redString"><h2>Арифметические операторы</h2></span>
+                                    <p class="redString">Арифметические операторы в JavaScript работают с числовыми значениями, литералами или переменными в качестве операндов и возвращают числовое значение.</p>
+                                    <p class="redString">В представленной ниже таблице вы можете вводить любые числа, нажимать enter и видеть результат, тренируйтесь.</p>
+                                    <div class="tableBlock">
+                                        <div class="tableBlockStr">
+                                            <div>Символьное обозначение</div>
+                                            <div>Название</div>
+                                            <div>Пример записи</div>
+                                            <div>Значение y</div>
+                                            <div>Итоговое значение x</div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>+</div>
+                                            <div>Сложение</div>
+                                            <div>x = y + 2</div>
+                                            <div>
+                                                <input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} performAnAction(this)" equation="y + 2">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr">
+                                            <div>-</div>
+                                            <div>Разница</div>
+                                            <div>x = y - 2</div>
+                                            <div>
+                                                <input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} performAnAction(this)" equation="y - 2">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>*</div>
+                                            <div>Умножение</div>
+                                            <div>x = y * 2</div>
+                                            <div>
+                                                <input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} performAnAction(this)" equation="y * 2">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr">
+                                            <div>/</div>
+                                            <div>Деление</div>
+                                            <div>x = y / 2</div>
+                                            <div>
+                                                <input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} performAnAction(this)" equation="y / 2">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>%</div>
+                                            <div>Остаток от деления</div>
+                                            <div>x = y % 2</div>
+                                            <div>
+                                                <input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} performAnAction(this)" equation="y % 2">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr">
+                                            <div class="">++</div>
+                                            <div>Инкремент</div>
+                                            <div>
+                                                <div>x = ++y</div>
+                                                <div>x = y++</div>
+                                            </div>
+                                            <div>
+                                                <input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} performAnAction(this)" equation="y+1">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>--</div>
+                                            <div>Декремент</div>
+                                            <div>
+                                                <div>x = --y</div>
+                                                <div>x = y--</div>
+                                            </div>
+                                            <div>
+                                                <input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} performAnAction(this)" equation="y-1">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="arithmeticcode" role="tabpanel" aria-labelledby="arithmeticcode-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="code">
+                                                &lt;!DOCTYPE html>
+                                                <br>&lt;html>
+                                                <br>&lt;body>
+                                                <br>&lt;p>y = 5, посчитать x = y + 2, и вывести x:&lt;/p>
+                                                <br>&lt;button onclick="myFunction()">Нажми&lt;/button>
+                                                <br>&lt;p id="demo">&lt;/p>
+                                                <br>&lt;script>
+                                                <br>function myFunction() {
+                                                <p class="redString">var y = 5;</p>
+                                                <p class="redString">var x = y + 2;</p>
+                                                <p class="redString"> document.getElementById("demo").innerHTML = x;</p>
+                                                }
+                                                <br>&lt;/script>
+                                                <br>&lt;/body>
+                                            </div>
+                                            <br><strong>Результат работы:</strong>
+                                            <p class="redString">7</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-assignment" role="tabpanel" aria-labelledby="list-assignment-list">
+                        <div class="contentIn">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="assignmenttheory-tab" data-toggle="tab" href="#assignmenttheory" role="tab" aria-controls="assignmenttheory" aria-selected="true">Теория</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="assignmentcode-tab" data-toggle="tab" href="#assignmentcode" role="tab" aria-controls="assignmentcode" aria-selected="false">Код</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="assignmenttheory" role="tabpanel" aria-labelledby="assignmenttheory-tab">
+                                    <span class="redString"><h2>Операторы присвоения</h2></span>
+                                    <p class="redString">Операторы присвоения придает левому операнду то значение, которое имеет правая часть. При это правый операнд должен является переменной. Символ, который передаёт значение содержащиеся в правом операнде, в левый операнд
+                                        обозначается символом равно (=). Так же вместе с оператором присвоения можно использовать другие операторы, что будет является сокращением для операций, которые выполняются прочими операторами</p>
+                                    <p class="redString">В представленной ниже таблице вы можете вводить любые числа, нажимать enter и видеть результат, тренируйтесь.</p>
+                                    <div class="tableBlock">
+                                        <div class="tableBlockStr">
+                                            <div>Символьное обозначение</div>
+                                            <div>Пример записи</div>
+                                            <div>Расшифровка записи</div>
+                                            <div>Значение x</div>
+                                            <div>Значение y</div>
+                                            <div>Итоговое значение x</div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>=</div>
+                                            <div>x = y</div>
+                                            <div>x = y</div>
+                                            <div><input disabled></div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="$(this).parents('.tableBlockStr').find('.result').text(this.value);"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr">
+                                            <div>+=</div>
+                                            <div>x += y</div>
+                                            <div>x = x + y</div>
+                                            <div>
+                                                <input class="x-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x + y">
+                                            </div>
+                                            <div>
+                                                <input class="y-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x + y">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>-=</div>
+                                            <div>x -= y</div>
+                                            <div>x = x - y</div>
+                                            <div>
+                                                <input class="x-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x - y">
+                                            </div>
+                                            <div>
+                                                <input class="y-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x - y">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr">
+                                            <div>/</div>
+                                            <div>x *= y</div>
+                                            <div>x = x * y</div>
+                                            <div>
+                                                <input class="x-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x * y">
+                                            </div>
+                                            <div>
+                                                <input class="y-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x * y">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>/=</div>
+                                            <div>x /= y</div>
+                                            <div>x = x / y</div>
+                                            <div>
+                                                <input class="x-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x / y">
+                                            </div>
+                                            <div>
+                                                <input class="y-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x / y">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr">
+                                            <div>%=</div>
+                                            <div>x %= y</div>
+                                            <div>x = x % y</div>
+                                            <div>
+                                                <input class="x-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x % y">
+                                            </div>
+                                            <div>
+                                                <input class="y-value" placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;} changeEquationValue(this)" x-value="" y-value="" equation="x % y">
+                                            </div>
+                                            <div class="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="assignmentcode" role="tabpanel" aria-labelledby="assignmentcode-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="code">
+                                                &lt;!DOCTYPE html>
+                                                <br>&lt;html>
+                                                <br>&lt;body>
+                                                <br>&lt;p>x = 10 и y = 5, выполнить x = y, и вывести x:&lt;/p>
+                                                <br>&lt;button onclick="myFunction()">Нажми&lt;/button>
+                                                <br>&lt;p id="demo">&lt;/p>
+                                                <br>&lt;script>
+                                                <br>function myFunction() {
+                                                <p class="redString">var x = 10;</p>
+                                                <p class="redString">var y = 5;</p>
+                                                <p class="redString">x = y;</p>
+                                                <p class="redString"> document.getElementById("demo").innerHTML = x;</p>
+                                                }
+                                                <br>&lt;/script>
+                                                <br>&lt;/body>
+                                            </div>
+                                            <br><strong>Результат работы:</strong>
+                                            <p class="redString">5</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-string" role="tabpanel" aria-labelledby="list-string-list">
+                        <div class="contentIn">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="stringtheory-tab" data-toggle="tab" href="#stringtheory" role="tab" aria-controls="stringtheory" aria-selected="true">Теория</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="stringcode-tab" data-toggle="tab" href="#stringcode" role="tab" aria-controls="stringcode" aria-selected="false">Код</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="stringtheory" role="tabpanel" aria-labelledby="stringtheory-tab">
+                                    <span class="redString"><h2>Строковые операторы</h2></span>
+                                    <p class="redString">Строковые операторы. Прием используемый для объединения двух или более строк называется конкатенацией. В JavaScript для конкатенации используется символ сложения (+), он объединяет несколько строк и выдает нам одну,
+                                        которая является объединением операндов.</p>
+                                    <p class="redString">В представленной ниже таблице вы можете вводить любые числа, нажимать enter и видеть результат, тренируйтесь.</p>
+                                    <div class="tableBlock">
+                                        <div class="tableBlockStr">
+                                            <div>Символьное обозначение</div>
+                                            <div>Пример записи</div>
+                                            <div>Значение x</div>
+                                            <div>Значение y</div>
+                                            <div>Итоговое значение</div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>+</div>
+                                            <div>result = x + y</div>
+                                            <div><input class="x-value" placeholder="Необходимо заполнить" onchange="changeEquationValue(this, 'string')" x-value="" y-value="" equation="x + y"></div>
+                                            <div><input class="y-value" placeholder="Необходимо заполнить" onchange="changeEquationValue(this, 'string')" x-value="" y-value="" equation="x + y"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr">
+                                            <div>+=</div>
+                                            <div>x += y</div>
+                                            <div><input class="x-value" placeholder="Необходимо заполнить" onchange="changeEquationValue(this, 'string')" x-value="" y-value="" equation="x + y"></div>
+                                            <div><input class="y-value" placeholder="Необходимо заполнить" onchange="changeEquationValue(this, 'string')" x-value="" y-value="" equation="x + y"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="stringcode" role="tabpanel" aria-labelledby="stringcode-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="code">
+                                                &lt;!DOCTYPE html>
+                                                <br>&lt;html>
+                                                <br>&lt;body>
+                                                <br>&lt;p>Оператор + объединяет строки.&lt;/p>
+                                                <br>&lt;button onclick="myFunction()">Try it&lt;/button>
+                                                <br>&lt;p id="demo">&lt;/p>
+                                                <br>&lt;script>
+                                                <br>function myFunction() {
+                                                <p class="redString">var text1 = "Доброе";</p>
+                                                <p class="redString">var text2 = "Утро";</p>
+                                                <p class="redString">var text3 = text1 + text2;</p>
+                                                <p class="redString"> document.getElementById("demo").innerHTML = text3;</p>
+                                                }
+                                                <br>&lt;/script>
+                                                <br>&lt;/body>
+                                            </div>
+                                            <br><strong>Результат работы:</strong>
+                                            <p class="redString">Доброе утро</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-comparisons" role="tabpanel" aria-labelledby="list-comparisons-list">
+                        <div class="contentIn">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="comparisonstheory-tab" data-toggle="tab" href="#comparisonstheory" role="tab" aria-controls="comparisonstheory" aria-selected="true">Теория</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="comparisonscode-tab" data-toggle="tab" href="#comparisonscode" role="tab" aria-controls="comparisonscode" aria-selected="false">Код</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="comparisonstheory" role="tabpanel" aria-labelledby="comparisonstheory-tab">
+                                    <span class="redString"><h2>Операторы сравнения</h2></span>
+                                    <p class="redString">Операторы сравнения. Операторы данной группы используются для сравнения одной переменной с другой. Операторы сравнения принимают в данном случае простые значения такие как числа или строки в качестве аргументов и оценивают
+                                        их true или false.</p>
+                                    <p class="redString">В представленной ниже таблице вы можете вводить любые числа, нажимать enter и видеть результат, тренируйтесь.</p>
+                                    <div class="tableBlock">
+                                        <div class="tableBlockStr">
+                                            <div>Символьное обозначение</div>
+                                            <div>Название</div>
+                                            <div>Пример</div>
+                                            <div>Значение x</div>
+                                            <div>Результат</div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>==</div>
+                                            <div>Сравнение значений</div>
+                                            <div>x == 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (this.value == 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>===</div>
+                                            <div>Сравнение типов и значений значений</div>
+                                            <div>x === 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (parseInt(this.value) === 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>!=</div>
+                                            <div>Проверка на неравенство значений</div>
+                                            <div>x != 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (this.value != 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>!==</div>
+                                            <div>Проверка на неравенство значений и типов</div>
+                                            <div>x !== 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (parseInt(this.value) !== 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>&gt;</div>
+                                            <div>Больше</div>
+                                            <div>x &gt; 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (this.value > 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>&lt;</div>
+                                            <div>Меньше</div>
+                                            <div>x &lt; 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (this.value < 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>&gt;=</div>
+                                            <div>Больше или равно</div>
+                                            <div>x &gt;= 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (this.value >= 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>&lt;=</div>
+                                            <div>Меньше или равно</div>
+                                            <div>x &lt;= 8</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (this.value <= 8) { $(this).parents('.tableBlockStr').find('.result').text('true'); } else { $(this).parents('.tableBlockStr').find('.result').text('false');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="comparisonscode" role="tabpanel" aria-labelledby="comparisonscode-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="code">
+                                                &lt;!DOCTYPE html>
+                                                <br>&lt;html>
+                                                <br>&lt;body>
+                                                <br>&lt;p>Присвойте x значение 5 и отобразите значение сравнения (x == 8):&lt;/p>
+                                                <br>&lt;button onclick="myFunction()">Try it&lt;/button>
+                                                <br>&lt;p id="demo">&lt;/p>
+                                                <br>&lt;script>
+                                                <br>function myFunction() {
+                                                <p class="redString">var x = 5;</p>
+                                                <p class="redString">var text2 = "Утро";</p>
+                                                <p class="redString">var text3 = text1 + text2;</p>
+                                                <p class="redString">document.getElementById("demo").innerHTML = (x == 8);</p> }
+                                                <br>&lt;/script>
+                                                <br>&lt;/body>
+                                            </div>
+                                            <br><strong>Результат работы:</strong>
+                                            <p class="redString">False</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-conditional" role="tabpanel" aria-labelledby="list-conditional-list">
+                        <div class="contentIn">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="conditionaltheory-tab" data-toggle="tab" href="#conditionaltheory" role="tab" aria-controls="conditionaltheory" aria-selected="true">Теория</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="conditionalcode-tab" data-toggle="tab" href="#conditionalcode" role="tab" aria-controls="conditionalcode" aria-selected="false">Код</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="conditionaltheory" role="tabpanel" aria-labelledby="conditionaltheory-tab">
+                                    <span class="redString"><h2>Условные (тернарные) операторы</h2></span>
+                                    <p class="redString">Условные (тернарные) операторы. Операторы данного типа используются, когда необходимо что-то сделать в зависимости от определенного условия. Количество условий не ограничено.</p>
+                                    <div class="tableBlock">
+                                        <div class="tableBlockStr">
+                                            <div>Синтаксис</div>
+                                            <div>Пример</div>
+                                            <div>Значение x</div>
+                                            <div>Итоговое значение</div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>Имя переменной = (условие) ? 'Значение 1' : 'Значение 2'</div>
+                                            <div>Возраст = (x &lt; 18) ? 'молодой' : 'взрослый'</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if (this.value > 18) { $(this).parents('.tableBlockStr').find('.result').text('взрослый'); } else { $(this).parents('.tableBlockStr').find('.result').text('молодой');}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="conditionalcode" role="tabpanel" aria-labelledby="conditionalcode-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="code">
+                                                &lt;!DOCTYPE html>
+                                                <br>&lt;html>
+                                                <br>&lt;body>
+                                                <br>&lt;p> Введите свой возраст и нажмите кнопку:&lt;/p>
+                                                <br>&lt;input id="age" value="18">
+                                                <br>&lt;button onclick="myFunction()">Проверить&lt;/button>
+                                                <br>&lt;p id="demo">&lt;/p>
+                                                <br>&lt;script>
+                                                <br>function myFunction() {
+                                                <p class="redString">var age, voteable;</p>
+                                                <p class="redString"> age = document.getElementById("age").value;</p>
+                                                <p class="redString"> voteable = (age &lt; 18) ? "Молодой":"Пожилой";</p>
+                                                <p class="redString"> document.getElementById("demo").innerHTML = voteable;</p>
+                                                <br>}
+                                                <br>&lt;/script>
+                                                <br>&lt;/body>
+                                            </div>
+                                            <strong>Вводимое значение:</strong>
+                                            <p class="redString">18</p>
+                                            <strong>Результат работы:</strong>
+                                            <p class="redString">Пожилой</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-logical" role="tabpanel" aria-labelledby="list-logical-list">
+                        <div class="contentIn">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="logicaltheory-tab" data-toggle="tab" href="#logicaltheory" role="tab" aria-controls="logicaltheory" aria-selected="true">Теория</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="logicalcode-tab" data-toggle="tab" href="#logicalcode" role="tab" aria-controls="logicalcode" aria-selected="false">Код</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="logicaltheory" role="tabpanel" aria-labelledby="logicaltheory-tab">
+                                    <span class="redString"><h2>Логические операторы</h2></span>
+                                    <p class="redString">Логические операторы. Операторы, относящиеся к группе логических операторов в JavaScript можно использовать с любыми переменными или значениями. Отчет логического оператора будет основан на том является или результат
+                                        записи истинным или ложным.</p>
+                                    <p class="redString">В представленной ниже таблице вы можете вводить любые числа, нажимать enter и видеть результат, тренируйтесь.</p>
+                                    <div class="tableBlock">
+                                        <div class="tableBlockStr">
+                                            <div>Символьное обозначение</div>
+                                            <div>Название</div>
+                                            <div>Пример записи</div>
+                                            <div>Значение x</div>
+                                            <div>Значение y</div>
+                                            <div>Итоговое значение</div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>&&</div>
+                                            <div>и</div>
+                                            <div>(x &lt; 10 && y &gt; 1)</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if(this.value < 10){$(this).parents('.tableBlockStr').find('.result').attr('xVal',true);checkEquation(this,1)} else {$(this).parents('.tableBlockStr').find('.result').attr('xVal',false);checkEquation(this,1)}}"></div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(checkToString(this)){return false;}else{if(this.value > 1){$(this).parents('.tableBlockStr').find('.result').attr('yVal',true);checkEquation(this,1)} else {$(this).parents('.tableBlockStr').find('.result').attr('yVal',false);checkEquation(this,1)}}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>||</div>
+                                            <div>или</div>
+                                            <div>(x === 5 || y === 5)</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(this.value == 5){$(this).parents('.tableBlockStr').find('.result').attr('xVal',true);checkEquation(this,2)} else {$(this).parents('.tableBlockStr').find('.result').attr('xVal',false);checkEquation(this,2)}"></div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="if(this.value == 5){$(this).parents('.tableBlockStr').find('.result').attr('yVal',true);checkEquation(this,2)} else {$(this).parents('.tableBlockStr').find('.result').attr('yVal',false);checkEquation(this,2)}"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="tableBlockStr tableBlockStrBG">
+                                            <div>!</div>
+                                            <div>не(отрицание)</div>
+                                            <div>!(x === y)</div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="$(this).parents('.tableBlockStr').find('.result').attr('xVal',this.value);checkEquation(this,3)"></div>
+                                            <div><input placeholder="Необходимо заполнить" onchange="$(this).parents('.tableBlockStr').find('.result').attr('yVal',this.value);checkEquation(this,3)"></div>
+                                            <div class="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="logicalcode" role="tabpanel" aria-labelledby="logicalcode-tab">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="code">
+                                                &lt;!DOCTYPE html>
+                                                <br>&lt;html>
+                                                <br>&lt;body>
+                                                <br>&lt;p>Оператор AND (&amp;&amp;) возвращает true, если оба выражения верны, в противном случае он возвращает false.&lt;/p>
+                                                <br>&lt;p id="demo">&lt;/p>
+                                                <br>&lt;script>
+                                                <br>function myFunction() {
+                                                <p class="redString">var x = 6;</p>
+                                                <p class="redString">var y = 3;</p>
+                                                <p class="redString"> document.getElementById("demo").innerHTML = (x &lt; 10 &amp;&amp; y > 1) + "&lt;br>" + (x &lt; 10 &amp;&amp; y &lt; 1);;</p>
+                                                <br>}
+                                                <br>&lt;/script>
+                                                <br>&lt;/body>
+                                            </div>
+                                            <br><strong>Результат работы:</strong>
+                                            <p class="redString">true</p>
+                                            <p class="redString">false</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-binary" role="tabpanel" aria-labelledby="list-binary-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Бинарные операторы</h2></span>
+                            <p class="redString">Бинарные операторы применяются, когда необходимо выполнить операции над аргументами, представленными в битовой (0,1) виде, а не в десятичном, шестнадцатеричном или восьмеричном виде.</p>
+                            <p class="redString">Например, десятичное число восемь имеет двоичное представление 1000. Битовые операторы выполняют свои операции над таким двоичным представлением (например, 1000), но они возвращают стандартные числовые значения JavaScript.</p>
+                            <p class="redString">В представленной ниже таблице вы можете вводить любые числа, нажимать enter и видеть результат, тренируйтесь.</p>
+                            <div class="tableBlock">
+                                <div class="tableBlockStr">
+                                    <div>Символьное обозначение</div>
+                                    <div>Название</div>
+                                    <div>Пример записи</div>
+                                    <div>Битовое представление</div>
+                                    <div>Значение x</div>
+                                    <div>Значение y</div>
+                                    <div>Итоговое значение в битах</div>
+                                    <div>Итоговое значение в десятичном виде</div>
+                                </div>
+                                <div class="tableBlockStr tableBlockStrBG">
+                                    <div>&</div>
+                                    <div>и</div>
+                                    <div>x = 5 & 1</div>
+                                    <div>0101 & 0001</div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('xVal',this.value);resultBit(this,1)}"></div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('yVal',this.value);resultBit(this,1)}"></div>
+                                    <div class="resultBit"></div>
+                                    <div class="result10"></div>
+                                </div>
+                                <div class="tableBlockStr tableBlockStrBG">
+                                    <div>|</div>
+                                    <div>или</div>
+                                    <div>x = 5 | 1</div>
+                                    <div>0101 | 0001</div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('xVal',this.value);resultBit(this,2)}"></div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('yVal',this.value);resultBit(this,2)}"></div>
+                                    <div class="resultBit"></div>
+                                    <div class="result10"></div>
+                                </div>
+                                <div class="tableBlockStr tableBlockStrBG">
+                                    <div>~</div>
+                                    <div>не</div>
+                                    <div>x = ~5</div>
+                                    <div>~0101</div>
+                                    <div><input disabled></div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{resultBit(this)}"></div>
+                                    <div class="resultBit"></div>
+                                    <div class="result10"></div>
+                                </div>
+                                <div class="tableBlockStr tableBlockStrBG">
+                                    <div>^</div>
+                                    <div>побитовое исключфющее или</div>
+                                    <div>x = 5 ^ 1</div>
+                                    <div>0101 ^ 0001</div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('xVal',this.value);resultBit(this,3)}"></div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('yVal',this.value);resultBit(this,3)}"></div>
+                                    <div class="resultBit"></div>
+                                    <div class="result10"></div>
+                                </div>
+                                <div class="tableBlockStr tableBlockStrBG">
+                                    <div>&lt;&lt;</div>
+                                    <div>левый сдвиг</div>
+                                    <div>x = 5 &lt;&lt; 1</div>
+                                    <div>0101 &lt;&lt; 1</div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('xVal',this.value);resultBit(this,4)}"></div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('yVal',this.value);resultBit(this,4)}"></div>
+                                    <div class="resultBit"></div>
+                                    <div class="result10"></div>
+                                </div>
+                                <div class="tableBlockStr tableBlockStrBG">
+                                    <div>&gt;&gt;</div>
+                                    <div>правый сдвиг</div>
+                                    <div>x = 5 &gt;&gt; 1</div>
+                                    <div>0101 &gt;&gt; 1</div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('xVal',this.value);resultBit(this,5)}"></div>
+                                    <div><input placeholder="Необходимо заполнить" onchange="if(checkTo1or0(this)){return false;}else{$(this).parents('.tableBlockStr').find('.resultBit').attr('yVal',this.value);resultBit(this,5)}"></div>
+                                    <div class="resultBit"></div>
+                                    <div class="result10"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-unary" role="tabpanel" aria-labelledby="list-unary-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Унарные операторы</h2></span>
+                            <p class="redString">Унарные операторы. Унарные это одни из самых простых операторов. Они работают только с одним операндом.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-relationship" role="tabpanel" aria-labelledby="list-relationship-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Оператор отношения</h2></span>
+                            <p class="redString">Оператор отношения сравнивает свои операнды и возвращает результат сравнения в виде булева значения.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-associativity" role="tabpanel" aria-labelledby="list-associativity-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Ассоциативность</h2></span>
+                            <p class="redString">Ассоциативность определяет порядок, в котором обрабатываются операторы с одинаковым приоритетом. Как правило если все операторы равны по статусу, то операции выполняются справа налево. Следующая таблица упорядочена с наивысшего
+                                (19) до низшего (0) приоритета.</p>
+                            <center><img src="img/associativity1.PNG" class="associativity1_img" alt="associativity1"><br><img src="img/associativity2.PNG" class="associativity2_img" alt="associativity2"><br><img src="img/associativity3.PNG" class="associativity3_img"
+                                    alt="associativity3"></center>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-callJS" role="tabpanel" aria-labelledby="list-callJS-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Вызов JavaScript-кода</h2></span>
+                            <p class="redString">JavaScript-код может встраиваться в HTML-документы разными способами, рассмотрим некоторые из них.</p>
+                            <ul>
+                                <li>Встроенные сценарии между парны тегов &lt;script&gt; и &lt;/script&gt;;</li>
+                                <li>Из внешнего файла, заданного атрибутом src тега &lt;script&gt;;</li>
+                                <li>В обработчик события, заданный в качестве значения HTML-атрибута, такого как onclick или onmouseover;</li>
+                            </ul>
+                            <p class="redString">Далее мы рассмотри перечисленные ранее методы вызова кода JavaScript.</p>
+                            <p class="redString">Рассмотрим первый из вариантов, а именно строенные сценарии между парны тегов &lt;script&gt; и &lt;/script&gt;. Как уже было сказано ранее лиентские JavaScript-сценарии могут встраиваться в HTML-файлы между тегами &lt;script&gt;
+                                и &lt;/script&gt;:</p>
+                            <strong><p>&lt;script&gt;</p>
+                            <p class="redString">// Здесь располагается JavaScript-код</p> 
+                            <p>&lt;/script&gt;</p></strong>
+                            <p class="redString">В следующем примере демонстрируется содержимое HTML-файла, включающего простую программу на языке JavaScript. Действия программы описываются в комментариях. На примере данной программы можно заметить то, как JavaScript-код
+                                встраивается в файлы HTML наряду со всем остальным, в данном случае - со стилями CSS</p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="code">&lt;!DOCTYPE html&gt; &lt;!-- Это файл HTML5 --&gt;
+                                        <br> &lt;html&gt; &lt;!-- Корневой элемент --&gt;<br> &lt;head&gt; &lt;!-- Заголовок, здесь располагаются сценарии и стили --&gt;<br> &lt;meta charset="utf-8"&gt;<br> &lt;title&gt;Простые часы&lt;/title&gt;<br>                                        &lt;script&gt; // Сценарий на JavaScript<br> // Определение функции для отображения текущего времени<br> function displayTime() {<br> var element = document.getElementById("clock"); // Найти элемент с id="clock"<br>                                        var now = new Date(); // Получить текущее время<br> element.innerHTML = now.toLocaleTimeString(); // Отобразить его<br> setTimeout(displayTime, 1000); // Вызвать снова через 1 сек<br> }
+                                        <br> window.onload = displayTime; // Начать отображение времени после загрузки документа<br> &lt;/script&gt;
+                                        <br> &lt;style&gt; /* Таблица стилей CSS для часов */<br> #clock { /* Стили применяются к элементу с id="clock" */<br> font: bold 24pt sans; /* Использовать большой полужирный шрифт */<br> background: #ddf; /* Светлый,
+                                        голубовато-серый фон */<br> padding: 10px; /* Отступы вокруг */<br> border: solid black 2px; /* И сплошная черная рамка */<br> border-radius: 10px; /* Закругленные углы (если поддерживаются) */<br> }
+                                        <br> &lt;/style&gt;
+                                        <br> &lt;/head&gt;
+                                        <br> &lt;body&gt; &lt;!-- Тело - отображаемая часть документа --&gt;<br> &lt;h1&gt;Цифровые часы&lt;/h1&gt; &lt;!-- Вывести заголовок --&gt;<br> &lt;span id="clock"&gt;&lt;/span&gt; &lt;!-- Время выводится здесь
+                                        --&gt;
+                                        <br> &lt;/body&gt;
+                                        <br> &lt;/html&gt;</div>
+                                </div>
+                            </div>
+                            <p class="redString"> Результат работы кода </p><img src="img/callJS.png">
+                            <p class="redString"> Теперь рассмотрим второй метод,а точнее метод с использованием атрибута src . Тег &lt;script> поддерживает атрибут src, который определяет URL-адрес файла, содержащего JavaScript-код. Используется он следующим образом:</p>
+                            <center><strong>&lt;script src="../../scripts/myscript.js">&lt;/script></strong></center>
+                            <p class="redString">Файл JavaScript-кода обычно имеет расширение .js и содержит JavaScript-код в котором отсутствуют теги &lt;script> или любого другого HTML-код.</p>
+                            <p class="redString">Тег &lt;script> с атрибутом src ведет себя точно так, как если бы содержимое указанного файла JavaScript-кода находилось непосредственно между тегами &lt;script> и &lt;/script>.</p>
+                            <p class="redString"> При использовании атрибута src любое содержимое между открывающим и закрывающим тегами &lt;script> игнорируется. При желании в качестве содержимого в тег &lt;script> можно вставлять описание включаемого программного кода или
+                                информацию об авторском праве. Однако следует заметить, что инструменты проверки соответствия разметки требованиям стандарта HTML5 будут выдавать предупреждения, если между тегами &lt;script src=""> и &lt;/script> будет
+                                находиться какой-либо текст, не являющийся пробельными символами или комментариями на языке JavaScript.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-handlers" role="tabpanel" aria-labelledby="list-handlers-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Обработчики событий в HTML</h2></span>
+                            <p class="redString">JavaScript-код, расположенный в теге &lt;script>, исполняется один раз, когда содержащий его HTML-файл считывается в веб-браузер. Для обеспечения интерактивности программы на языке JavaScript должны определять обработчики событий
+                                - JavaScript-функции, которые регистрируются в веб-браузере и автоматически вызываются веб-браузером в ответ на определенные события (такие как ввод данных пользователем).</p>
+                            <p class="redString">JavaScript-код может регистрировать обработчики событий, присваивая функции свойствам объектов Element (таким как onclick или onmouseover), представляющих HTML-элементы в документе.</p>
+                            Свойства обработчиков событий, такие как onclick, отражают HTML-атрибуты с теми же именами, что позволяет определять обработчики событий, помещая JavaScript-код в HTML-атрибуты. Например:
+                            <center><strong>&lt;button onClick="alert('Привет')">Щелкните меня!&lt;/button></strong></center>
+                            <p class="redString">Обратите внимание на атрибут onClick. JavaScript-код, являющийся значением этого атрибута, будет выполняться всякий раз, когда пользователь будет щелкать на кнопке.</p>
+                            <p class="redString">Атрибуты обработчиков событий, включенных в разметку HTML, могут содержать одну или несколько JavaScript-инструкций, отделяемых друг от друга точками с запятой. Эти инструкции будут преобразованы интерпретатором в тело функции,
+                                которая в свою очередь станет значением соответствующего свойства обработчика события.</p>
+                            <p class="redString">Однако обычно в HTML-атрибуты обработчиков событий включаются простые инструкции присваивания или простые вызовы функций, объявленных где-то в другом месте. Это позволяет держать большую часть JavaScript-кода внутри сценариев
+                                и ограничивает степень взаимопроникновения JavaScript и HTML-кода. На практике многие веб-разработчики считают плохим стилем использование HTML-атрибутов обработчиков событий и предпочитают отделять содержимое от поведения.</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-test1" role="tabpanel" aria-labelledby="list-test1-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Тест 1</h2></span>
+                            <div class="test1_info">
+                                <p class="redString test1Description">Предлагаем пройти тест для самопроверки по изученному материалу. Нажмите кнопку ниже, чтобы начать тест.</p>
+                                <button class="btn btn-primary test1Go">Начать</button>
+                            </div>
+                            <div class="test1Content">
+                                <div class="test1_questions">
+                                    <div class="test1Question">
+                                        Вопрос 1
+                                        <form>
+                                            <label>Вопрос 1. Какой группы операторов НЕ существует ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation111" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation111">1.Теоретические операторы</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation112" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation112">2.Арифметические операторы</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation113" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation113">3.Строковые операторы</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation114" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation114">4.Условные операторы</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test1Question">
+                                        Вопрос 2
+                                        <form>
+                                            <label>Вопрос 2 Когда используются тернарные операторы?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation121" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation121">1.Операторы данного типа используются, когда необходимо что-то сделать с одним операндом.</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation122" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation122">2.Операторы данного типа используются, когда необходимо что-то сделать в зависимости от определенного условия.</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation123" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation123">3.Операторы данного типа используются, когда необходимо сравнивает свои операнды.</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation124" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation124">4.Операторы данного типа используются, когда необходимо присвоить левому операнду значение правого операнда</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test1Question">
+                                        Вопрос 3
+                                        <form>
+                                            <label>Вопрос 3 Какое символьное обозначение относиться только к бинармым операторам?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation131" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation131">1. &&</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation132" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation132">2. +</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation133" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation133">3. >> </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation134" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation134">4. = </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test1Question">
+                                        Вопрос 4
+                                        <form>
+                                            <label>Вопрос 4 Каким символьным обозначением можно проверить тип значений?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation141" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation141">1. !=</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation142" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation142">2. =</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation143" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation143">3. ==</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation144" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation144">4. ===</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test1Question">
+                                        Вопрос 5
+                                        <form>
+                                            <label>Вопрос 5 С каким количеством операндов работают унарные операторы ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation151" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation151">1. Только с одним</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation152" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation152">2. Только с двумя</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation153" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation153">3. С любым количеством </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation154" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation154">4. Они работают без операндов</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <button class="btn btn-primary test1Submit" type="btn">Отправить</button>
+                                </div>
+                            </div>
+                            <div class="result_test1">
+                                <h3>Тест <span id="test1_no"></span> пройден</h3>
+                                <p>Количество баллов, набранных за ответы на вопросы: <span class="result_point_test1"></span> из 5</p>
+                                <div class="test1_result_btn">
+                                    <button class="btn btn-primary showResultTest1" type="btn">Посмотреть результат</button>
+                                    <button class="btn btn-primary reGoTest1" type="btn">Перепройти тест</button>
+                                </div>
+                                <hr>
+                                <div id="result_test1_Content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-test2" role="tabpanel" aria-labelledby="list-test2-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Тест 2</h2></span>
+                            <div class="test2_info">
+                                <p class="redString test2Description">Предлагаем пройти тест для самопроверки по изученному материалу. Нажмите кнопку ниже, чтобы начать тест.</p>
+                                <button class="btn btn-primary test2Go">Начать</button>
+                            </div>
+                            <div class="test2Content">
+                                <div class="test2_questions">
+                                    <div class="test2Question">
+                                        Вопрос 1
+                                        <form>
+                                            <label>Вопрос 1. Какое из действий будет выполняться в 1 очередь?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation211" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation211">1. Группировка</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation212" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation212">2. Остаток от деления</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation213" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation213">3. Унарный плюс</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation214" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation214">4. Побитовое и</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test2Question">
+                                        Вопрос 2
+                                        <form>
+                                            <label>Вопрос 2 Какая из операций равна "Логическое не"?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation221" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation221">1. Умножение</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation222" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation222">2. Унарный плюс</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation223" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation223">3. Сравнение</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation224" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation224">4 И</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test2Question">
+                                        Вопрос 3
+                                        <form>
+                                            <label>Вопрос 3 Какой из операторов имеет самый низкий приоритет ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation231" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation231">1 '(...)'</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation232" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation232">2. /</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation233" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation233">3. +</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation234" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation234">4. &</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test2Question">
+                                        Вопрос 4
+                                        <form>
+                                            <label>Вопрос 4 Отличается ли приоритет у операторов "Префиксное увеличение" и "Определение типа" ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation241" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation241">1. Да, в начале выполняется "Префиксное увеличение" </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation242" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation242">2. Да, в начале выполняется "Определение типа" </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation243" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation243">3. Они не могут использоваться вместе</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation244" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation244">4. Нет, не отличается</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test2Question">
+                                        Вопрос 5
+                                        <form>
+                                            <label>Вопрос 5 Отличается ли приоритет у операторов "Побитовое И" и "Побитовое XOR" ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation251" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation251">1 Да, в начале выполняется "Побитовое И"</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation252" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation252">2 Да, в начале выполняется "Побитовое XOR"</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation253" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation253">3 Они не могут использоваться вместе</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation254" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation254">4 Нет, не отличается</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <button class="btn btn-primary test2Submit" type="btn">Отправить</button>
+                                </div>
+                            </div>
+                            <div class="result_test2">
+                                <h3>Тест <span id="test2_no"></span> пройден</h3>
+                                <p>Количество баллов, набранных за ответы на вопросы: <span class="result_point_test2"></span> из 5</p>
+                                <div class="test2_result_btn">
+                                    <button class="btn btn-primary showResultTest2" type="btn">Посмотреть результат</button>
+                                    <button class="btn btn-primary reGoTest2" type="btn">Перепройти тест</button>
+                                </div>
+                                <hr>
+                                <div id="result_test2_Content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list-test3" role="tabpanel" aria-labelledby="list-test3-list">
+                        <div class="contentIn">
+                            <span class="redString"><h2>Тест 3</h2></span>
+                            <div class="test3_info">
+                                <p class="redString test3Description">Предлагаем пройти тест для самопроверки по изученному материалу. Нажмите кнопку ниже, чтобы начать тест.</p>
+                                <button class="btn btn-primary test3Go">Начать</button>
+                            </div>
+                            <div class="test3Content">
+                                <div class="test3_questions">
+                                    <div class="test3Question">
+                                        Вопрос 1
+                                        <form>
+                                            <label>Вопрос 1. Между какими парными тегами прописывается JavaScript код?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation311" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation311">1. script и /script </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation312" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation312">2. abbr и /abbr </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation313" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation313">3. div и /div </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation314" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation314">4. head и /head</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test3Question">
+                                        Вопрос 2
+                                        <form>
+                                            <label>Вопрос 2 Что такое src ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation321" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation321">1. Абривиатура</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation322" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation322">2. Атрибут </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation323" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation323">3. Одиночный тег</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation324" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation324">4. Парный тег</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test3Question">
+                                        Вопрос 3
+                                        <form>
+                                            <label>Вопрос 3 Для чего используется src ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation331" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation331">1. Для создание заговка</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation332" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation332">2. Для добавления таблицы</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation333" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation333">3. Для определния URL-адреса файла</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation334" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation334">4. Для скрытия данных</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test3Question">
+                                        Вопрос 4
+                                        <form>
+                                            <label>Вопрос 4 Каким тегом является тего button ?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation341" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation341">1. Это не тег</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation342" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation342">2. Одинарный тег</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation343" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation343">3 Может быть как одинарным, так и парным тегом</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation344" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation344">4  Парный тег </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="test3Question">
+                                        Вопрос 5
+                                        <form>
+                                            <label>Вопрос 5 Могут ли атрибуты обработчиков событий содержать JavaScript-инструкции. Если да, то сколько?</label>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation351" name="radio-stacked" value="1" required>
+                                                <label class="custom-control-label" for="customControlValidation351">1. Могут, как один, так и несколько</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation352" name="radio-stacked" value="2" required>
+                                                <label class="custom-control-label" for="customControlValidation352">2. Могут, только один</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation353" name="radio-stacked" value="3" required>
+                                                <label class="custom-control-label" for="customControlValidation353">3. Могут, только несколько </label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id="customControlValidation354" name="radio-stacked" value="4" required>
+                                                <label class="custom-control-label" for="customControlValidation354">4. Не могут </label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <button class="btn btn-primary test3Submit" type="btn">Отправить</button>
+                                </div>
+                            </div>
+                            <div class="result_test3">
+                                <h3>Тест <span id="test3_no"></span> пройден</h3>
+                                <p>Количество баллов, набранных за ответы на вопросы: <span class="result_point_test3"></span> из 5</p>
+                                <div class="test3_result_btn">
+                                    <button class="btn btn-primary showResultTest3" type="btn">Посмотреть результат</button>
+                                    <button class="btn btn-primary reGoTest3" type="btn">Перепройти тест</button>
+                                </div>
+                                <hr>
+                                <div id="result_test3_Content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="scrollup"><img src="img/up.png" alt=""></a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
